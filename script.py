@@ -269,7 +269,7 @@ def download_repo(repo):
 
 	else:
 		## Split the repo because subprocess requires the repos to be broken into a list. --> ['git', 'clone', 'repo']
-		repo_split = ('g19it clone ' + repo).split()
+		repo_split = ('git clone ' + repo).split()
 
 		try:
 			# Call the command that is split in the command line.
