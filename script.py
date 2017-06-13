@@ -233,7 +233,7 @@ def install_brew():
 
 ## Command to install Node.
 def install_node():
-	os.system('brew install node@0.12.1')
+	os.system('brew install node@0.12')
 
 # Get the current line of directories.
 cwd = os.getcwd()
