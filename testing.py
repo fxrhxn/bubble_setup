@@ -11,4 +11,11 @@ def node_check():
 		return True
 
 
-print node_check()
+
+repo_split = ('git clone ' + 'https://github.com/joshyhargreaves/cmparch').split()
+
+
+repo_path = os.path.dirname(os.path.abspath(__file__)) + '/cmparch'
+
+
+subprocess.Popen(repo_split, cwd=repo_path).communicate()

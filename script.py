@@ -254,18 +254,21 @@ def download_repo(repo):
 
 	## Clone "bubble_private" INSIDE of "bubble"
 	if(repo == repo_urls[1]):
+
 		## Split the repo because subprocess requires the repos to be broken into a list. --> ['git', 'clone', 'repo']
 		repo_split = ('git clone ' + repo).split()
 
+		## This is the repo path. It is supposed to download "bubble_private" inside of the bubble repository.
+		repo_path = os.path.dirname(os.path.abspath(__file__)) + '/bubble'
+
 		try:
 			# Call the command that is split in the command line.
-			subprocess.call(repo_split)
+			subprocess.Popen(repo_split, cwd=repo_path).communicate()
 			print('Finished Cloning: ' + repo)
 		except OSError as Err:
 			print(Err)
 			## Incase there's some error, catch that fucker.
 			print('ERORR - Error while cloning ' + repo)
-
 
 	else:
 		## Split the repo because subprocess requires the repos to be broken into a list. --> ['git', 'clone', 'repo']
@@ -275,7 +278,8 @@ def download_repo(repo):
 			# Call the command that is split in the command line.
 			subprocess.call(repo_split)
 			print('Finished Cloning: ' + repo)
-		except OSError:
+		except OSError as Err:
+			print(Err)
 			## Incase there's some error, catch that fucker.
 			print('ERORR - Error while cloning ' + repo)
 
