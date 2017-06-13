@@ -197,6 +197,18 @@ def gem_check():
 		return True
 
 
+# Function that checks if node is installed.
+def node_check():
+	reading = os.popen('node -v').read()
+
+	# If the array count is 0, gem does not exist.
+	if(len(reading.split()) == 0):
+		return False
+	else:
+		return True
+
+
+
 ## Next 4 functions are installing functions.
 
 ## Ruby is usually installed, here is the function anyways if it needs to be installed.
@@ -219,6 +231,9 @@ def install_gem():
 def install_brew():
 	os.system('/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"')
 
+## Command to install Node.
+def install_node():
+	os.system('brew install node@0.12.15')
 
 # Get the current line of directories.
 cwd = os.getcwd()
@@ -253,7 +268,7 @@ def download_repo(repo):
 
 	else:
 		## Split the repo because subprocess requires the repos to be broken into a list. --> ['git', 'clone', 'repo']
-		repo_split = ('git clone ' + repo).split()
+		repo_split = ('g19it clone ' + repo).split()
 
 		try:
 			# Call the command that is split in the command line.
@@ -302,6 +317,11 @@ else:
 	else:
 		print('gem already installed.')
 
+	# Check node and install it if it does not exist.
+	if(node_check() == False):
+		install_node()
+	else:
+		print('node and npm already installed.')
 
 ################################################################################
 	'''
