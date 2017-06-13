@@ -239,7 +239,17 @@ def download_repo(repo):
 
 	## Clone "bubble_private" INSIDE of "bubble"
 	if(repo == repo_urls[1]):
-		print(repo)
+		## Split the repo because subprocess requires the repos to be broken into a list. --> ['git', 'clone', 'repo']
+		repo_split = ('git clone ' + repo).split()
+
+		try:
+			# Call the command that is split in the command line.
+			subprocess.call(repo_split)
+			print('Finished Cloning: ' + repo)
+		except OSError:
+			## Incase there's some error, catch that fucker.
+			print('ERORR - Error while cloning ' + repo)
+
 
 	else:
 		## Split the repo because subprocess requires the repos to be broken into a list. --> ['git', 'clone', 'repo']
