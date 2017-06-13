@@ -261,7 +261,8 @@ def download_repo(repo):
 			# Call the command that is split in the command line.
 			subprocess.call(repo_split)
 			print('Finished Cloning: ' + repo)
-		except OSError:
+		except OSError as Err:
+			print(Err)
 			## Incase there's some error, catch that fucker.
 			print('ERORR - Error while cloning ' + repo)
 
