@@ -116,9 +116,9 @@ class GemDependency(Dependency):
 
 ## NPM commands we have to call.
 npm_commands = [
-	{'cmd' : 'sudo npm install -g coffee-script', 'v' : '1.6.3'},
-	{'cmd' : 'sudo npm install -g node-inspector', 'v' : '0.12.1'},
-	{'cmd' : 'sudo npm install -g shrinkpack', 'v' : '0.13.1'},
+	{'cmd' : 'coffee-script', 'v' : '1.6.3'},
+	{'cmd' : 'node-inspector', 'v' : '0.12.1'},
+	{'cmd' : 'shrinkpack', 'v' : '0.13.1'},
 ]
 
 ## Pip commands to install.
@@ -138,23 +138,15 @@ gem_commands = [
 # Function that installs the packages.
 def install_package(cmd, type):
 
-	## Python packages.
-	if(type == 'pip'):
-		os.system(cmd)
+	#Install the command w/ os packacge.
+	os.system(cmd)
 
-	# NPM packages
-	elif(type == 'npm'):
-		os.system(cmd)
 
-	# GEM packages.
-	elif(type == 'gem'):
-		os.system(cmd)
-
-## This function checks if ruby is installed.
-def ruby_check():
+## This function checks if ruby  / brew / pip / node is installed.
+def check_basics(cmd):
 
 	## Get the current version of Ruby.
-	reading = os.popen('ruby -v').read()
+	reading = os.popen(cmd).read()
 
 	# If the array count is 0, ruby does not exist.
 	if(len(reading.split()) == 0):
@@ -162,54 +154,9 @@ def ruby_check():
 	else:
 		return True
 
-# This function checks that brew is installed.
-def brew_check():
-
-	brew_read = os.popen('brew -v').read()
-
-	# If the array count is 0, brew does not exist.
-	if(len(brew_read.split()) == 0):
-		return False
-	else:
-		return True
-
-
-# Function checks that pip is installed.
-def pip_check():
-	reading = os.popen('pip -V').read()
-
-	# If the array count is 0, pip does not exist.
-	if(len(reading.split()) == 0):
-		return False
-	else:
-		return True
-
-
-
-# Function that checks if gem is installed.
-def gem_check():
-	reading = os.popen('gem -v').read()
-
-	# If the array count is 0, gem does not exist.
-	if(len(reading.split()) == 0):
-		return False
-	else:
-		return True
-
-
-# Function that checks if node is installed.
-def node_check():
-	reading = os.popen('node -v').read()
-
-	# If the array count is 0, gem does not exist.
-	if(len(reading.split()) == 0):
-		return False
-	else:
-		return True
-
-
-
-## Next 4 functions are installing functions.
+'''
+ Next 5 functions are installing functions.
+'''
 
 ## Ruby is usually installed, here is the function anyways if it needs to be installed.
 def install_ruby():
@@ -233,7 +180,15 @@ def install_brew():
 
 ## Command to install Node.
 def install_node():
-	os.system('brew install node@0.12')
+
+	# Install node.
+	os.system('brew install node')
+
+	# "n" is a library that allows you to change node versions.
+	os.system('npm install -g n')
+
+	# Get the version of node specified here.
+	os.system('n 0.12.15')
 
 # Get the current line of directories.
 cwd = os.getcwd()
@@ -299,31 +254,31 @@ if(current_directory != 'Desktop'):
 else:
 
 	# Check ruby and see correct version.
-	if(ruby_check() == False):
+	if(check_basics('ruby -v') == False):
 		install_ruby()
 	else:
 		print('ruby already installed.')
 
 	## Check brew and find the correct version.
-	if(brew_check() == False):
+	if(check_basics('brew -v') == False):
 		install_brew()
 	else:
 		print('brew already installed.')
 
 	## Check pip and install the same version.
-	if(pip_check() == False):
+	if(check_basics('pip -V') == False):
 		install_pip()
 	else:
 		print('pip already installed.')
 
 	## Check gem and install the correct version.
-	if(gem_check() == False):
+	if(check_basics('gem -v') == False):
 		install_gem()
 	else:
 		print('gem already installed.')
 
 	# Check node and install it if it does not exist.
-	if(node_check() == False):
+	if(check_basics('node -v') == False):
 		install_node()
 	else:
 		print('node and npm already installed.')
@@ -346,7 +301,7 @@ else:
 			print(command + ' already installed.')
 		else:
 			print('INSTALLING ' + command)
-			install_package(full_command, 'npm')
+			install_package('sudo npm install -g ' + full_command, 'npm')
 
 ################################################################################
 	'''
@@ -430,4 +385,4 @@ else:
 
 
 
-#
+# Fin
