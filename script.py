@@ -6,6 +6,7 @@ import subprocess
 
 ## Find a way to check if the version exists.
 
+
 #returns the output, ignores return code (unless ignore_fail is false)
 def get_output(cmd, ignore_fail=True, no_verbose=False):
 	try:
@@ -370,6 +371,15 @@ else:
 
 
 
+
+################################################################################
+	'''
+
+		Sixth Step  - Bubble Site SETUP
+
+	'''
+
+	print('Go to bubble-app.slack.com')
 
 #------------------------------
 	print('Setup Script ENDED')

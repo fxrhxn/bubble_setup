@@ -19,9 +19,17 @@ def file_creator(path,data,filename):
 
 	print('Creating a file named ' +  '"' + filename + '"' + ' inside of ' + path)
 
-	# Create a file.
+	# Create a file with the open function.
+	f = open(path + filename ,"w+")
 
 	print('Created ' + '"' + filename + '"'   + ', now pasting credentials in the file.')
+
+
+	# Write a new file with the data.
+	f.write(data)
+
+	# Close the fie stream.
+	f.close()
 
 	print('Done pasting credentials')
 
@@ -75,7 +83,7 @@ while confirmed_3 == False:
 credentials_given = False
 
 # Path for the credentials file.
-credential_path = os.getcwd() + '/bubble/lib'
+credential_path = os.getcwd() + '/bubble/lib/'
 
 while credentials_given == False:
 	employee_credentials = raw_input('Paste your credentials: ')

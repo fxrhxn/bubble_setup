@@ -4,10 +4,11 @@ import subprocess
 
 def create_files():
 
-	filename = os.getcwd() + '/bubble/' + 'environment.coffee'
+
+	credential_path = os.getcwd() + '/bubble/' + 'environment.coffee'
 
 	# w+ means write. # r means to read. # a means to append.
-	f = open(filename,"w+")
+	f = open(credential_path,"w+")
 	f.write('HAHAHAHAHA')
 	f.close()
 
