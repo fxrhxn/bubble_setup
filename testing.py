@@ -15,27 +15,22 @@ def confirm_question(question):
 		return False
 
 # Function that creates files for us in other paths.
-def file_creator(path,data,filename):
+def file_creator(path,filename):
 
 	print('Creating a file named ' +  '"' + filename + '"' + ' inside of ' + path)
 
 	# Create a file with the open function.
 	f = open(path + filename ,"w+")
 
-	print('Created ' + '"' + filename + '"'   + ', now pasting credentials in the file.')
+	print('Created ' + '"' + filename + '"'   + '')
 
-
-	# Write a new file with the data.
-	f.write(data)
 
 	# Close the fie stream.
 	f.close()
 
-	print('Done pasting credentials')
-
 
 ## Questions to confirm
-confirmed_1 = False 	# 'Did you open bubble-app.slack.com?'
+confirmed_1 = True 	# 'Did you open bubble-app.slack.com?'
 confirmed_2 = True	# 'Please go to bubble-bot and type in "new_developer"'
 confirmed_3 = True	# 'Did you open bubble-app.slack.com?'
 
@@ -85,17 +80,10 @@ credentials_given = False
 # Path for the credentials file.
 credential_path = os.getcwd() + '/bubble/lib/'
 
-while credentials_given == False:
-	employee_credentials = raw_input('Paste your credentials: ')
+file_creator(credential_path, 'credentials.coffee')
 
-	if len(employee_credentials) > 1:
-
-		# Change credentials_given to True so question goes away.
-		credentials_given = True
-
-		# Function that creates files for us.
-		file_creator(credential_path, employee_credentials, 'credentials.coffee')
-
+## Open the credentials.coffee VIM file
+os.system('vim ' + credential_path)
 
 
 
