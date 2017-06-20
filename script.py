@@ -286,6 +286,8 @@ print('Setup Script STARTED')
 	First Step - Check for prerequisites(Gem / Ruby / Brew / Pip ) + See if user is in desktop.
 
 '''
+
+print(current_directory)
 if(current_directory != 'Desktop'):
 	print('ERROR - Please make sure you are in the "Desktop" directory.')
 else:
