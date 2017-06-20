@@ -1,18 +1,26 @@
 import os
 import subprocess
 
+import sys
 
-def create_files():
 
 
-	credential_path = os.getcwd() + '/bubble/' + 'environment.coffee'
+
+def create_files(data):
+
+
+	credential_path = os.getcwd() + '/bubble/' + 'test4.coffee'
 
 	# w+ means write. # r means to read. # a means to append.
 	f = open(credential_path,"w+")
-	f.write('HAHAHAHAHA')
+	f.write(data)
 	f.close()
 
-create_files()
+
+print('Enter Credentials. Press Ctrl D to Save.')
+userInput = sys.stdin.read()
+
+create_files(userInput)
 
 
 '''

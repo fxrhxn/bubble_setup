@@ -1,6 +1,6 @@
 import os
 import subprocess
-
+import sys
 
 
 
@@ -252,15 +252,18 @@ def confirm_question(question):
 		return False
 
 # Function that creates files for us in other paths.
-def file_creator(path,filename):
+def file_creator(path, data, filename):
 
 	print('Creating a file named ' +  '"' + filename + '"' + ' inside of ' + path)
 
 	# Create a file with the open function.
 	f = open(path + filename ,"w+")
 
-	print('Created ' + '"' + filename + '"'   + '')
+	# Write the new data inside of the file.
+	f.write(data)
 
+	# Print closing message.
+	print('Created ' + '"' + filename + '"'   + '')
 
 	# Close the fie stream.
 	f.close()
@@ -286,35 +289,35 @@ if(current_directory != 'Desktop'):
 	print('ERROR - Please make sure you are in the "Desktop" directory.')
 else:
 
-	# Check ruby and see correct version.
-	if(check_basics('ruby -v') == False):
-		install_ruby()
-	else:
-		print('ruby already installed.')
-
-	## Check brew and find the correct version.
-	if(check_basics('brew -v') == False):
-		install_brew()
-	else:
-		print('brew already installed.')
-
-	## Check pip and install the same version.
-	if(check_basics('pip -V') == False):
-		install_pip()
-	else:
-		print('pip already installed.')
-
-	## Check gem and install the correct version.
-	if(check_basics('gem -v') == False):
-		install_gem()
-	else:
-		print('gem already installed.')
-
-	# Check node and install it if it does not exist.
-	if(check_basics('node -v') == False):
-		install_node()
-	else:
-		print('node and npm already installed.')
+	# # Check ruby and see correct version.
+	# if(check_basics('ruby -v') == False):
+	# 	install_ruby()
+	# else:
+	# 	print('ruby already installed.')
+	#
+	# ## Check brew and find the correct version.
+	# if(check_basics('brew -v') == False):
+	# 	install_brew()
+	# else:
+	# 	print('brew already installed.')
+	#
+	# ## Check pip and install the same version.
+	# if(check_basics('pip -V') == False):
+	# 	install_pip()
+	# else:
+	# 	print('pip already installed.')
+	#
+	# ## Check gem and install the correct version.
+	# if(check_basics('gem -v') == False):
+	# 	install_gem()
+	# else:
+	# 	print('gem already installed.')
+	#
+	# # Check node and install it if it does not exist.
+	# if(check_basics('node -v') == False):
+	# 	install_node()
+	# else:
+	# 	print('node and npm already installed.')
 
 ################################################################################
 	'''
@@ -322,19 +325,21 @@ else:
 		Second Step - Install Node, then NPM packages.
 
 	'''
-	# Loop through all of the commands and check them.
-	for cmd in npm_commands:
+	# # Loop through all of the commands and check them.
+	# for cmd in npm_commands:
+	#
+	# 	## Full command to install, and version.
+	# 	full_command = cmd['cmd'] + '@' + cmd['v']
+	# 	command = cmd['cmd']
+	# 	version = cmd['v']
+	#
+	# 	if(GlobalNPM(command, version).ensure()['installed']):
+	# 		print(command + ' already installed.')
+	# 	else:
+	# 		print('INSTALLING ' + command)
+	# 		install_package('sudo npm install -g ' + full_command, 'npm')
 
-		## Full command to install, and version.
-		full_command = cmd['cmd'] + '@' + cmd['v']
-		command = cmd['cmd']
-		version = cmd['v']
 
-		if(GlobalNPM(command, version).ensure()['installed']):
-			print(command + ' already installed.')
-		else:
-			print('INSTALLING ' + command)
-			install_package('sudo npm install -g ' + full_command, 'npm')
 
 ################################################################################
 	'''
@@ -343,26 +348,26 @@ else:
 
 	'''
 
-	## Loop through all of the pip commands.
-	for cmd in pip_commands:
-
-		# No version specified.
-		if(cmd['v'] == None):
-
-			#Check to see if dependency is installed.
-			if(PipDependency(cmd['package']).ensure()['installed']):
-				print(cmd['package'] + ' already installed.')
-			else:
-				install_package('pip install ' + cmd['package'], 'pip')
-
-		# Version is given.
-		else:
-
-			#Check to see if dependency is installed.
-			if(PipDependency(cmd['package'], cmd['v']).ensure()['installed']):
-				print(cmd['package'] + ' already installed.')
-			else:
-				install_package('pip install ' + cmd['package'] + '==' + cmd['v'], 'pip')
+	# ## Loop through all of the pip commands.
+	# for cmd in pip_commands:
+	#
+	# 	# No version specified.
+	# 	if(cmd['v'] == None):
+	#
+	# 		#Check to see if dependency is installed.
+	# 		if(PipDependency(cmd['package']).ensure()['installed']):
+	# 			print(cmd['package'] + ' already installed.')
+	# 		else:
+	# 			install_package('pip install ' + cmd['package'], 'pip')
+	#
+	# 	# Version is given.
+	# 	else:
+	#
+	# 		#Check to see if dependency is installed.
+	# 		if(PipDependency(cmd['package'], cmd['v']).ensure()['installed']):
+	# 			print(cmd['package'] + ' already installed.')
+	# 		else:
+	# 			install_package('pip install ' + cmd['package'] + '==' + cmd['v'], 'pip')
 
 
 ################################################################################
@@ -372,21 +377,21 @@ else:
 
 	'''
 
-	# Loop through all of the gem commands in the array.
-	for cmd in gem_commands:
-
-		# Check if GemDependency is installed.
-		if(GemDependency(cmd).ensure()['installed']):
-			print('Already installed ' + cmd)
-		else:
-			print('Installing ' + cmd)
-
-			# Command to install the gem dependency.
-			command = 'sudo gem install ' + cmd
-
-			# Function that actually does the installing.
-			install_package(command, 'gem')
-
+	# # Loop through all of the gem commands in the array.
+	# for cmd in gem_commands:
+	#
+	# 	# Check if GemDependency is installed.
+	# 	if(GemDependency(cmd).ensure()['installed']):
+	# 		print('Already installed ' + cmd)
+	# 	else:
+	# 		print('Installing ' + cmd)
+	#
+	# 		# Command to install the gem dependency.
+	# 		command = 'sudo gem install ' + cmd
+	#
+	# 		# Function that actually does the installing.
+	# 		install_package(command, 'gem')
+	#
 
 #------------------------------
 	print('DEPENDENCIES INSTALLED - Now Downloading Bubble / Bubble Private')
@@ -400,8 +405,6 @@ else:
 	# Loop all of the repo urls and clone them.
 	for url in repo_urls:
 		download_repo(url)
-
-
 
 
 ################################################################################
@@ -452,15 +455,21 @@ else:
 		else:
 			confirmed_3 = True
 
+			# Ask for the user's credentials!
+			print('Enter the Credentials. Press Ctrl D to Save.')
+			input_credentials = sys.stdin.read()
 
 			# Path for the credentials file.
 			credential_path = os.getcwd() + '/bubble/lib/'
 
-			file_creator(credential_path, 'credentials.coffee')
+			# Pass data to file creator, and create the file with the data.
+			file_creator(credential_path, input_credentials, 'credentials.coffee')
 
-			## Open the credentials.coffee VIM file
-			os.system('vim ' + credential_path)
 
+			# Change etc/hosts to local.bubble.is from localhost
+			for i, line in enumerate(fileinput.input('/private/etc/hosts', inplace=1)):
+			sys.stdout.write(line.replace('localhost', 'local.bubble.is'))  # replace 'sit' and write
+			if i == 4: sys.stdout.write('\n')  # write a blank line after the 5th line
 
 
 
