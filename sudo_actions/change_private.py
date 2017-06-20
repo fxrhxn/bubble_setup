@@ -8,13 +8,15 @@ This simple script replaces localhost on the employees computer and changes it t
 
 import fileinput
 import os
+import sys
 import subprocess
 
 
 
 # Change etc/hosts to local.bubble.is from localhost
 for i, line in enumerate(fileinput.input('/private/etc/hosts', inplace=1)):
-	sys.stdout.write(line.replace('localhost', 'local.bubble.is'))  # replace 'sit' and write
-	if i == 4: sys.stdout.write('\n')  # write a blank line after the 5th line
 
-print('Changed localhost to local.bubble.is')
+	# replace 'localhost' with local.bubble.is
+	sys.stdout.write(line.replace('localhost', 'local.bubble.is'))
+	
+	print('Changed localhost to local.bubble.is')
