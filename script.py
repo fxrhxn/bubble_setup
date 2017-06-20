@@ -1,6 +1,7 @@
 import os
 import subprocess
 import sys
+import fileinput
 
 
 
@@ -285,7 +286,7 @@ print('Setup Script STARTED')
 	First Step - Check for prerequisites(Gem / Ruby / Brew / Pip ) + See if user is in desktop.
 
 '''
-if(current_directory != 'Desktop'):
+if(current_directory == 'Desktop'):
 	print('ERROR - Please make sure you are in the "Desktop" directory.')
 else:
 
@@ -402,9 +403,9 @@ else:
 		Fifth Step  - Download Bubble, and Bubble Private.
 
 	'''
-	# Loop all of the repo urls and clone them.
-	for url in repo_urls:
-		download_repo(url)
+	# # Loop all of the repo urls and clone them.
+	# for url in repo_urls:
+	# 	download_repo(url)
 
 
 ################################################################################
@@ -468,8 +469,8 @@ else:
 
 			# Change etc/hosts to local.bubble.is from localhost
 			for i, line in enumerate(fileinput.input('/private/etc/hosts', inplace=1)):
-			sys.stdout.write(line.replace('localhost', 'local.bubble.is'))  # replace 'sit' and write
-			if i == 4: sys.stdout.write('\n')  # write a blank line after the 5th line
+				sys.stdout.write(line.replace('localhost', 'local.bubble.is'))  # replace 'sit' and write
+				if i == 4: sys.stdout.write('\n')  # write a blank line after the 5th line
 
 
 

@@ -74,16 +74,13 @@ while confirmed_3 == False:
 		confirmed_3 = True
 
 
-# Boolean to check if the credentials are given or not.
-credentials_given = False
+		# Path for the credentials file.
+		credential_path = os.getcwd() + '/bubble/lib/'
 
-# Path for the credentials file.
-credential_path = os.getcwd() + '/bubble/lib/'
+		file_creator(credential_path, 'credentials.coffee')
 
-file_creator(credential_path, 'credentials.coffee')
-
-## Open the credentials.coffee VIM file
-os.system('vim ' + credential_path)
+		## Open the credentials.coffee VIM file
+		os.system('vim ' + credential_path)
 
 
 
