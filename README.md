@@ -5,7 +5,7 @@
 </h2>
 
 <h3>
-	curl https://raw.githubusercontent.com/fxrhxn/bubble_setup/master/script.py | python
+	python <(curl "https://raw.githubusercontent.com/fxrhxn/bubble_setup/master/script.py" -s -N)
 </h3>
 
 <ul>
