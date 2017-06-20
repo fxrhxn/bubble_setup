@@ -458,21 +458,20 @@ else:
 		else:
 			confirmed_3 = True
 
-			# Ask for the user's credentials!
-			print('Enter the Credentials. Press Ctrl D to Save.')
-			input_credentials = sys.stdin.read()
-
 			# Path for the credentials file.
 			credential_path = os.getcwd() + '/bubble/lib/'
 
 			# Pass data to file creator, and create the file with the data.
-			file_creator(credential_path, input_credentials, 'credentials.coffee')
+			file_creator(credential_path, '##INSIDE OF VIM press escape to finish, and ":wq" to save. Press I to insert.', 'credentials.coffee')
 
+			# Notify user of VIM transition.
+			confirm_question('We are going to move towards a VIM screen to enter your credentials, press any key to continue.')
+
+			os.system('vim bubble/lib/credentials.coffee')
 
 			# Change etc/hosts to local.bubble.is from localhost
-			print('Please change localhost to local.bubble.is')
+			confirm_question('Please change localhost to local.bubble.is, in the NEXT vim screen.')
 			os.system('sudo vim /private/etc/hosts')
-
 
 
 #------------------------------
