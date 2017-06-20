@@ -218,7 +218,9 @@ def download_repo(repo):
 
 
 		## This is the repo path. It is supposed to download "bubble_private" inside of the bubble repository.
-		repo_path = os.path.dirname(os.path.abspath(__file__)) + '/bubble'
+		#repo_path = os.path.dirname(os.path.abspath(__file__)) + '/bubble'
+
+		repo_path = os.getcwd() + '/bubble'
 
 		try:
 			# Call the command that is split in the command line.
