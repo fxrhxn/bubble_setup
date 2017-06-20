@@ -190,7 +190,7 @@ def install_node():
 	os.system('npm install -g n')
 
 	# Get the version of node specified here.
-	os.system('n 0.12.15')
+	os.system('sudo n 0.12.15')
 
 # Get the current line of directories.
 cwd = os.getcwd()
@@ -209,11 +209,13 @@ repo_urls = ['https://github.com/bubblegroup/bubble', 'https://github.com/jphaas
 ## Function to download repos
 def download_repo(repo):
 
+	## Split the repo because subprocess requires the repos to be broken into a list. --> ['git', 'clone', 'repo']
+	repo_split = ('git clone ' + repo).split()
+
+
 	## Clone "bubble_private" INSIDE of "bubble"
 	if(repo == repo_urls[1]):
 
-		## Split the repo because subprocess requires the repos to be broken into a list. --> ['git', 'clone', 'repo']
-		repo_split = ('git clone ' + repo).split()
 
 		## This is the repo path. It is supposed to download "bubble_private" inside of the bubble repository.
 		repo_path = os.path.dirname(os.path.abspath(__file__)) + '/bubble'
@@ -228,12 +230,11 @@ def download_repo(repo):
 			print('ERORR - Error while cloning ' + repo)
 
 	else:
-		## Split the repo because subprocess requires the repos to be broken into a list. --> ['git', 'clone', 'repo']
-		repo_split = ('git clone ' + repo).split()
 
 		try:
 			# Call the command that is split in the command line.
 			subprocess.call(repo_split)
+
 			print('Finished Cloning: ' + repo)
 		except OSError as Err:
 			print(Err)
