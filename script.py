@@ -292,35 +292,35 @@ if(current_directory != 'Desktop'):
 	print('ERROR - Please make sure you are in the "Desktop" directory.')
 else:
 
-	# # Check ruby and see correct version.
-	# if(check_basics('ruby -v') == False):
-	# 	install_ruby()
-	# else:
-	# 	print('ruby already installed.')
-	#
-	# ## Check brew and find the correct version.
-	# if(check_basics('brew -v') == False):
-	# 	install_brew()
-	# else:
-	# 	print('brew already installed.')
-	#
-	# ## Check pip and install the same version.
-	# if(check_basics('pip -V') == False):
-	# 	install_pip()
-	# else:
-	# 	print('pip already installed.')
-	#
-	# ## Check gem and install the correct version.
-	# if(check_basics('gem -v') == False):
-	# 	install_gem()
-	# else:
-	# 	print('gem already installed.')
-	#
-	# # Check node and install it if it does not exist.
-	# if(check_basics('node -v') == False):
-	# 	install_node()
-	# else:
-	# 	print('node and npm already installed.')
+	# Check ruby and see correct version.
+	if(check_basics('ruby -v') == False):
+		install_ruby()
+	else:
+		print('ruby already installed.')
+
+	## Check brew and find the correct version.
+	if(check_basics('brew -v') == False):
+		install_brew()
+	else:
+		print('brew already installed.')
+
+	## Check pip and install the same version.
+	if(check_basics('pip -V') == False):
+		install_pip()
+	else:
+		print('pip already installed.')
+
+	## Check gem and install the correct version.
+	if(check_basics('gem -v') == False):
+		install_gem()
+	else:
+		print('gem already installed.')
+
+	# Check node and install it if it does not exist.
+	if(check_basics('node -v') == False):
+		install_node()
+	else:
+		print('node and npm already installed.')
 
 ################################################################################
 	'''
@@ -328,19 +328,19 @@ else:
 		Second Step - Install Node, then NPM packages.
 
 	'''
-	# # Loop through all of the commands and check them.
-	# for cmd in npm_commands:
-	#
-	# 	## Full command to install, and version.
-	# 	full_command = cmd['cmd'] + '@' + cmd['v']
-	# 	command = cmd['cmd']
-	# 	version = cmd['v']
-	#
-	# 	if(GlobalNPM(command, version).ensure()['installed']):
-	# 		print(command + ' already installed.')
-	# 	else:
-	# 		print('INSTALLING ' + command)
-	# 		install_package('sudo npm install -g ' + full_command, 'npm')
+	# Loop through all of the commands and check them.
+	for cmd in npm_commands:
+
+		## Full command to install, and version.
+		full_command = cmd['cmd'] + '@' + cmd['v']
+		command = cmd['cmd']
+		version = cmd['v']
+
+		if(GlobalNPM(command, version).ensure()['installed']):
+			print(command + ' already installed.')
+		else:
+			print('INSTALLING ' + command)
+			install_package('sudo npm install -g ' + full_command, 'npm')
 
 
 
@@ -351,26 +351,26 @@ else:
 
 	'''
 
-	# ## Loop through all of the pip commands.
-	# for cmd in pip_commands:
-	#
-	# 	# No version specified.
-	# 	if(cmd['v'] == None):
-	#
-	# 		#Check to see if dependency is installed.
-	# 		if(PipDependency(cmd['package']).ensure()['installed']):
-	# 			print(cmd['package'] + ' already installed.')
-	# 		else:
-	# 			install_package('pip install ' + cmd['package'], 'pip')
-	#
-	# 	# Version is given.
-	# 	else:
-	#
-	# 		#Check to see if dependency is installed.
-	# 		if(PipDependency(cmd['package'], cmd['v']).ensure()['installed']):
-	# 			print(cmd['package'] + ' already installed.')
-	# 		else:
-	# 			install_package('pip install ' + cmd['package'] + '==' + cmd['v'], 'pip')
+	## Loop through all of the pip commands.
+	for cmd in pip_commands:
+
+		# No version specified.
+		if(cmd['v'] == None):
+
+			#Check to see if dependency is installed.
+			if(PipDependency(cmd['package']).ensure()['installed']):
+				print(cmd['package'] + ' already installed.')
+			else:
+				install_package('pip install ' + cmd['package'], 'pip')
+
+		# Version is given.
+		else:
+
+			#Check to see if dependency is installed.
+			if(PipDependency(cmd['package'], cmd['v']).ensure()['installed']):
+				print(cmd['package'] + ' already installed.')
+			else:
+				install_package('pip install ' + cmd['package'] + '==' + cmd['v'], 'pip')
 
 
 ################################################################################
@@ -380,21 +380,21 @@ else:
 
 	'''
 
-	# # Loop through all of the gem commands in the array.
-	# for cmd in gem_commands:
-	#
-	# 	# Check if GemDependency is installed.
-	# 	if(GemDependency(cmd).ensure()['installed']):
-	# 		print('Already installed ' + cmd)
-	# 	else:
-	# 		print('Installing ' + cmd)
-	#
-	# 		# Command to install the gem dependency.
-	# 		command = 'sudo gem install ' + cmd
-	#
-	# 		# Function that actually does the installing.
-	# 		install_package(command, 'gem')
-	#
+	# Loop through all of the gem commands in the array.
+	for cmd in gem_commands:
+
+		# Check if GemDependency is installed.
+		if(GemDependency(cmd).ensure()['installed']):
+			print('Already installed ' + cmd)
+		else:
+			print('Installing ' + cmd)
+
+			# Command to install the gem dependency.
+			command = 'sudo gem install ' + cmd
+
+			# Function that actually does the installing.
+			install_package(command, 'gem')
+
 
 #------------------------------
 	print('DEPENDENCIES INSTALLED - Now Downloading Bubble / Bubble Private')
@@ -405,9 +405,9 @@ else:
 		Fifth Step  - Download Bubble, and Bubble Private.
 
 	'''
-	# # Loop all of the repo urls and clone them.
-	# for url in repo_urls:
-	# 	download_repo(url)
+	# Loop all of the repo urls and clone them.
+	for url in repo_urls:
+		download_repo(url)
 
 
 ################################################################################
