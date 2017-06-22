@@ -446,70 +446,70 @@ else:
 		Sixth Step  - Bubble Site SETUP
 
 	'''
-	# Make the first confirmed question False to start the process..
-	confirmed_1 = False
-
-	# Repeating question to be answered.
-	while confirmed_1 == False:
-
-		if confirm_question('Did you open bubble-app.slack.com?  ') == False:
-
-			print("We can't proceed unless you verify that you have opened bubble-app.slack.com.")
-		else:
-
-			# Set confirmed_1 to True( AKA closing it. )
-			confirmed_1 = True
-
-			# Set confirmed_2 to False( AKA activating it. )
-			confirmed_2 = False
-
-	# Repeating question to be answered.
-	while confirmed_2 == False:
-
-		if confirm_question('Please send a direct message to bubblebot and type in "new_developer"') == False:
-
-			print("We can't move on unless this is done.")
-		else:
-
-			# Set confirmed_2 to True( AKA closing it. )
-			confirmed_2 = True
-
-			# Set confirmed_3 to False( AKA activating it. )
-			confirmed_3 = False
-
-
-	# Repeating question to be answered.
-	while confirmed_3 == False:
-
-
-		if confirm_question('Did the credentials to print out? It may take a while. [20 - 30 minutes]') == False:
-
-			print("We can't move on unless this is done.")
-		else:
-			confirmed_3 = True
-
-			# Path for the credentials file.
-			credential_path = os.getcwd() + '/bubble/lib/'
-
-			# Pass data to file creator, and create the file with the data.
-			file_creator(credential_path, '##INSIDE OF VIM press escape to finish, and ":wq" to save. Press I to insert.', 'credentials.coffee')
-
-			# Notify user of VIM transition.
-			confirm_question('We are going to move towards a VIM screen to enter your credentials, press any key to continue.')
-
-			os.system('vim bubble/lib/credentials.coffee')
-
-			# Change etc/hosts to local.bubble.is from localhost
-			confirm_question('Please change localhost to local.bubble.is, in the NEXT vim screen.')
-
-			os.system('sudo vim /private/etc/hosts')
-
-
-			# Install the requests pip command, so we can make the delete replace function work.
-			os.system('pip install requests')
+	# # Make the first confirmed question False to start the process..
+	# confirmed_1 = False
+	#
+	# # Repeating question to be answered.
+	# while confirmed_1 == False:
+	#
+	# 	if confirm_question('Did you open bubble-app.slack.com?  ') == False:
+	#
+	# 		print("We can't proceed unless you verify that you have opened bubble-app.slack.com.")
+	# 	else:
+	#
+	# 		# Set confirmed_1 to True( AKA closing it. )
+	# 		confirmed_1 = True
+	#
+	# 		# Set confirmed_2 to False( AKA activating it. )
+	# 		confirmed_2 = False
+	#
+	# # Repeating question to be answered.
+	# while confirmed_2 == False:
+	#
+	# 	if confirm_question('Please send a direct message to bubblebot and type in "new_developer"') == False:
+	#
+	# 		print("We can't move on unless this is done.")
+	# 	else:
+	#
+	# 		# Set confirmed_2 to True( AKA closing it. )
+	# 		confirmed_2 = True
+	#
+	# 		# Set confirmed_3 to False( AKA activating it. )
+	# 		confirmed_3 = False
+	#
+	#
+	# # Repeating question to be answered.
+	# while confirmed_3 == False:
+	#
+	#
+	# 	if confirm_question('Did the credentials to print out? It may take a while. [20 - 30 minutes]') == False:
+	#
+	# 		print("We can't move on unless this is done.")
+	# 	else:
+	# 		confirmed_3 = True
+	#
+	# 		# Path for the credentials file.
+	# 		credential_path = os.getcwd() + '/bubble/lib/'
+	#
+	# 		# Pass data to file creator, and create the file with the data.
+	# 		file_creator(credential_path, '##INSIDE OF VIM press escape to finish, and ":wq" to save. Press I to insert.', 'credentials.coffee')
+	#
+	# 		# Notify user of VIM transition.
+	# 		confirm_question('We are going to move towards a VIM screen to enter your credentials, press any key to continue.')
+	#
+	# 		os.system('vim bubble/lib/credentials.coffee')
+	#
+	# 		# Change etc/hosts to local.bubble.is from localhost
+	# 		confirm_question('Please change localhost to local.bubble.is, in the NEXT vim screen.')
+	#
+	# 		os.system('sudo vim /private/etc/hosts')
+	#
+	#
+	# 		# Install the requests pip command, so we can make the delete replace function work.
+	# 		os.system('pip install requests')
 
 			# Function that fixes the node-gyp problem.
-			delete_replace()
+	delete_replace()
 
 
 #------------------------------
