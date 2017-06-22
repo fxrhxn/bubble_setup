@@ -300,9 +300,6 @@ def delete_replace():
 	# Write the path with the content.
     new_file.write(r.content)
 
-	# Print out this message when we are done.
-	print('Edited /.node-gyp/0.12.15/include/node/v8.hfile.')
-
 
 ## Questions to confirm
 confirmed_1 = True 	# 'Did you open bubble-app.slack.com?'
@@ -516,6 +513,9 @@ else:
 
 			#	Function that fixes the node-gyp problem.
 			delete_replace()
+
+			print('Edited /.node-gyp/0.12.15/include/node/v8.hfile.')
+
 
 
 #------------------------------
