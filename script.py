@@ -504,15 +504,9 @@ else:
 
 			os.system('sudo vim /private/etc/hosts')
 
-
-################################################################################
-	'''
-
-		Seventh Step  - Bubble Site SETUP
-
-	'''
-			## Function that replaces the node file that is causing the isssue.
+			# Function that fixes the node-gyp problem.
 			delete_replace()
+
 
 #------------------------------
 	print('Setup Script ENDED')
