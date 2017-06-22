@@ -3,12 +3,7 @@ import subprocess
 import sys
 import fileinput
 
-os.system('pip install requests')
 
-import requests
-
-
-## Find a way to check if the version exists.
 
 
 #returns the output, ignores return code (unless ignore_fail is false)
@@ -367,6 +362,12 @@ else:
 		Second Step - Install Node, then NPM packages.
 
 	'''
+	## Install requests library to do some calling in the future.
+	os.system('pip install requests')
+
+	# Import the requests library.
+	import requests
+
 	# Loop through all of the commands and check them.
 	for cmd in npm_commands:
 
