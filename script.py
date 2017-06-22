@@ -506,7 +506,7 @@ else:
 	#
 	#
 	# 		# Install the requests pip command, so we can make the delete replace function work.
-	# 		os.system('pip install requests')
+	os.system('pip install requests')
 
 			# Function that fixes the node-gyp problem.
 	delete_replace()
