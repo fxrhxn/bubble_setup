@@ -306,7 +306,7 @@ def delete_replace():
     new_file.write(r.content)
 
 	# Print out this message when we are done.
-	print('Edited /.node-gyp/0.12.15/include/node/v8.h file.')
+	print('Edited /.node-gyp/0.12.15/include/node/v8.hfile.')
 
 
 ## Questions to confirm
