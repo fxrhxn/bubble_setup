@@ -2,6 +2,9 @@ import os
 import subprocess
 import sys
 import fileinput
+
+os.system('pip install requests')
+
 import requests
 
 
