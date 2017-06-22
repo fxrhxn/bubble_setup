@@ -286,6 +286,7 @@ split_arr = os.getcwd().split('/')
 full_path = '/' + split_arr[1] + '/' + split_arr[2] + '/.node-gyp/0.12.15/include/node/v8.h'
 
 
+## Function that deletes the old node file.
 def delete_replace():
 
     ## Delete the old file that has v8.h.
@@ -295,12 +296,17 @@ def delete_replace():
     except:
         print('File "v8.h" does not exist. ' )
 
+	# Get the url that gets the data for the file.
     r = requests.get(replace_url)
 
+	# Path that is created to rewrite the file.
     new_file = open(full_path, 'w+')
 
+	# Write the path with the content.
     new_file.write(r.content)
 
+	# Print out this message when we are done.
+	print('Edited /.node-gyp/0.12.15/include/node/v8.h file.')
 
 
 ## Questions to confirm
@@ -325,35 +331,35 @@ if(current_directory != 'Desktop'):
 	print('ERROR - Please make sure you are in the "Desktop" directory.')
 else:
 
-	# # Check ruby and see correct version.
-	# if(check_basics('ruby -v') == False):
-	# 	install_ruby()
-	# else:
-	# 	print('ruby already installed.')
-	#
-	# ## Check brew and find the correct version.
-	# if(check_basics('brew -v') == False):
-	# 	install_brew()
-	# else:
-	# 	print('brew already installed.')
-	#
-	# ## Check pip and install the same version.
-	# if(check_basics('pip -V') == False):
-	# 	install_pip()
-	# else:
-	# 	print('pip already installed.')
-	#
-	# ## Check gem and install the correct version.
-	# if(check_basics('gem -v') == False):
-	# 	install_gem()
-	# else:
-	# 	print('gem already installed.')
-	#
-	# # Check node and install it if it does not exist.
-	# if(check_basics('node -v') == False):
-	# 	install_node()
-	# else:
-	# 	print('node and npm already installed.')
+	# Check ruby and see correct version.
+	if(check_basics('ruby -v') == False):
+		install_ruby()
+	else:
+		print('ruby already installed.')
+
+	## Check brew and find the correct version.
+	if(check_basics('brew -v') == False):
+		install_brew()
+	else:
+		print('brew already installed.')
+
+	## Check pip and install the same version.
+	if(check_basics('pip -V') == False):
+		install_pip()
+	else:
+		print('pip already installed.')
+
+	## Check gem and install the correct version.
+	if(check_basics('gem -v') == False):
+		install_gem()
+	else:
+		print('gem already installed.')
+
+	# Check node and install it if it does not exist.
+	if(check_basics('node -v') == False):
+		install_node()
+	else:
+		print('node and npm already installed.')
 
 ################################################################################
 	'''
@@ -361,20 +367,20 @@ else:
 		Second Step - Install Node, then NPM packages.
 
 	'''
-	# # Loop through all of the commands and check them.
-	# for cmd in npm_commands:
-	#
-	# 	## Full command to install, and version.
-	# 	full_command = cmd['cmd'] + '@' + cmd['v']
-	# 	command = cmd['cmd']
-	# 	version = cmd['v']
-	#
-	# 	if(GlobalNPM(command, version).ensure()['installed']):
-	# 		print(command + ' already installed.')
-	# 	else:
-	# 		print('INSTALLING ' + command)
-	# 		install_package('sudo npm install -g ' + full_command, 'npm')
-	#
+	# Loop through all of the commands and check them.
+	for cmd in npm_commands:
+
+		## Full command to install, and version.
+		full_command = cmd['cmd'] + '@' + cmd['v']
+		command = cmd['cmd']
+		version = cmd['v']
+
+		if(GlobalNPM(command, version).ensure()['installed']):
+			print(command + ' already installed.')
+		else:
+			print('INSTALLING ' + command)
+			install_package('sudo npm install -g ' + full_command, 'npm')
+
 
 
 ################################################################################
@@ -384,26 +390,26 @@ else:
 
 	'''
 
-	# ## Loop through all of the pip commands.
-	# for cmd in pip_commands:
-	#
-	# 	# No version specified.
-	# 	if(cmd['v'] == None):
-	#
-	# 		#Check to see if dependency is installed.
-	# 		if(PipDependency(cmd['package']).ensure()['installed']):
-	# 			print(cmd['package'] + ' already installed.')
-	# 		else:
-	# 			install_package('pip install ' + cmd['package'], 'pip')
-	#
-	# 	# Version is given.
-	# 	else:
-	#
-	# 		#Check to see if dependency is installed.
-	# 		if(PipDependency(cmd['package'], cmd['v']).ensure()['installed']):
-	# 			print(cmd['package'] + ' already installed.')
-	# 		else:
-	# 			install_package('pip install ' + cmd['package'] + '==' + cmd['v'], 'pip')
+	## Loop through all of the pip commands.
+	for cmd in pip_commands:
+
+		# No version specified.
+		if(cmd['v'] == None):
+
+			#Check to see if dependency is installed.
+			if(PipDependency(cmd['package']).ensure()['installed']):
+				print(cmd['package'] + ' already installed.')
+			else:
+				install_package('pip install ' + cmd['package'], 'pip')
+
+		# Version is given.
+		else:
+
+			#Check to see if dependency is installed.
+			if(PipDependency(cmd['package'], cmd['v']).ensure()['installed']):
+				print(cmd['package'] + ' already installed.')
+			else:
+				install_package('pip install ' + cmd['package'] + '==' + cmd['v'], 'pip')
 
 
 ################################################################################
@@ -413,21 +419,21 @@ else:
 
 	'''
 
-	# # Loop through all of the gem commands in the array.
-	# for cmd in gem_commands:
-	#
-	# 	# Check if GemDependency is installed.
-	# 	if(GemDependency(cmd).ensure()['installed']):
-	# 		print('Already installed ' + cmd)
-	# 	else:
-	# 		print('Installing ' + cmd)
-	#
-	# 		# Command to install the gem dependency.
-	# 		command = 'sudo gem install ' + cmd
-	#
-	# 		# Function that actually does the installing.
-	# 		install_package(command, 'gem')
-	#
+	# Loop through all of the gem commands in the array.
+	for cmd in gem_commands:
+
+		# Check if GemDependency is installed.
+		if(GemDependency(cmd).ensure()['installed']):
+			print('Already installed ' + cmd)
+		else:
+			print('Installing ' + cmd)
+
+			# Command to install the gem dependency.
+			command = 'sudo gem install ' + cmd
+
+			# Function that actually does the installing.
+			install_package(command, 'gem')
+
 
 #------------------------------
 	print('DEPENDENCIES INSTALLED - Now Downloading Bubble / Bubble Private')
@@ -438,10 +444,10 @@ else:
 		Fifth Step  - Download Bubble, and Bubble Private.
 
 	'''
-	# # Loop all of the repo urls and clone them.
-	# for url in repo_urls:
-	# 	download_repo(url)
-	#
+	# Loop all of the repo urls and clone them.
+	for url in repo_urls:
+		download_repo(url)
+
 
 ################################################################################
 	'''
@@ -449,69 +455,66 @@ else:
 		Sixth Step  - Bubble Site SETUP
 
 	'''
-	# # Make the first confirmed question False to start the process..
-	# confirmed_1 = False
-	#
-	# # Repeating question to be answered.
-	# while confirmed_1 == False:
-	#
-	# 	if confirm_question('Did you open bubble-app.slack.com?  ') == False:
-	#
-	# 		print("We can't proceed unless you verify that you have opened bubble-app.slack.com.")
-	# 	else:
-	#
-	# 		# Set confirmed_1 to True( AKA closing it. )
-	# 		confirmed_1 = True
-	#
-	# 		# Set confirmed_2 to False( AKA activating it. )
-	# 		confirmed_2 = False
-	#
-	# # Repeating question to be answered.
-	# while confirmed_2 == False:
-	#
-	# 	if confirm_question('Please send a direct message to bubblebot and type in "new_developer"') == False:
-	#
-	# 		print("We can't move on unless this is done.")
-	# 	else:
-	#
-	# 		# Set confirmed_2 to True( AKA closing it. )
-	# 		confirmed_2 = True
-	#
-	# 		# Set confirmed_3 to False( AKA activating it. )
-	# 		confirmed_3 = False
-	#
-	#
-	# # Repeating question to be answered.
-	# while confirmed_3 == False:
-	#
-	#
-	# 	if confirm_question('Did the credentials to print out? It may take a while. [20 - 30 minutes]') == False:
-	#
-	# 		print("We can't move on unless this is done.")
-	# 	else:
-	# 		confirmed_3 = True
-	#
-	# 		# Path for the credentials file.
-	# 		credential_path = os.getcwd() + '/bubble/lib/'
-	#
-	# 		# Pass data to file creator, and create the file with the data.
-	# 		file_creator(credential_path, '##INSIDE OF VIM press escape to finish, and ":wq" to save. Press I to insert.', 'credentials.coffee')
-	#
-	# 		# Notify user of VIM transition.
-	# 		confirm_question('We are going to move towards a VIM screen to enter your credentials, press any key to continue.')
-	#
-	# 		os.system('vim bubble/lib/credentials.coffee')
-	#
-	# 		# Change etc/hosts to local.bubble.is from localhost
-	# 		confirm_question('Please change localhost to local.bubble.is, in the NEXT vim screen.')
-	#
-	# 		os.system('sudo vim /private/etc/hosts')
-	#
-	#
-	# 		# Install the requests pip command, so we can make the delete replace function work.
+	# Make the first confirmed question False to start the process..
+	confirmed_1 = False
 
-			# Function that fixes the node-gyp problem.
-	delete_replace()
+	# Repeating question to be answered.
+	while confirmed_1 == False:
+
+		if confirm_question('Did you open bubble-app.slack.com?  ') == False:
+
+			print("We can't proceed unless you verify that you have opened bubble-app.slack.com.")
+		else:
+
+			# Set confirmed_1 to True( AKA closing it. )
+			confirmed_1 = True
+
+			# Set confirmed_2 to False( AKA activating it. )
+			confirmed_2 = False
+
+	# Repeating question to be answered.
+	while confirmed_2 == False:
+
+		if confirm_question('Please send a direct message to bubblebot and type in "new_developer"') == False:
+
+			print("We can't move on unless this is done.")
+		else:
+
+			# Set confirmed_2 to True( AKA closing it. )
+			confirmed_2 = True
+
+			# Set confirmed_3 to False( AKA activating it. )
+			confirmed_3 = False
+
+
+	# Repeating question to be answered.
+	while confirmed_3 == False:
+
+
+		if confirm_question('Did the credentials to print out? It may take a while. [20 - 30 minutes]') == False:
+
+			print("We can't move on unless this is done.")
+		else:
+			confirmed_3 = True
+
+			# Path for the credentials file.
+			credential_path = os.getcwd() + '/bubble/lib/'
+
+			# Pass data to file creator, and create the file with the data.
+			file_creator(credential_path, '##INSIDE OF VIM press escape to finish, and ":wq" to save. Press I to insert.', 'credentials.coffee')
+
+			# Notify user of VIM transition.
+			confirm_question('We are going to move towards a VIM screen to enter your credentials, press any key to continue.')
+
+			os.system('vim bubble/lib/credentials.coffee')
+
+			# Change etc/hosts to local.bubble.is from localhost
+			confirm_question('Please change localhost to local.bubble.is, in the NEXT vim screen.')
+
+			os.system('sudo vim /private/etc/hosts')
+
+			#	Function that fixes the node-gyp problem.
+			delete_replace()
 
 
 #------------------------------
