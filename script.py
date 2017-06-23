@@ -288,8 +288,12 @@ def delete_replace():
     try:
 
         os.remove(full_path)
-    except:
-        print('File "v8.h" does not exist. ' )
+
+	## Catch the OS error, and print it out. 
+	except OSError as err:
+
+		print('Error while editing "v8.h" file.')
+		print(err)
 
 	# Get the url that gets the data for the file.
     r = requests.get(replace_url)
@@ -499,12 +503,12 @@ else:
 			credential_path = os.getcwd() + '/bubble/lib/'
 
 			# Pass data to file creator, and create the file with the data.
-			file_creator(credential_path, '##INSIDE OF VIM press escape to finish, and ":wq" to save. Press I to insert.', 'credentials.coffee')
+			file_creator(credential_path, '##INSIDE OF VIM press escape to finish, and ":wq" to save. Press I to insert.', 'environment.coffee')
 
 			# Notify user of VIM transition.
 			confirm_question('We are going to move towards a VIM screen to enter your credentials, press any key to continue.')
 
-			os.system('vim bubble/lib/credentials.coffee')
+			os.system('vim bubble/lib/environment.coffee')
 
 			# Change etc/hosts to local.bubble.is from localhost
 			confirm_question('Please change localhost to local.bubble.is, in the NEXT vim screen.')
